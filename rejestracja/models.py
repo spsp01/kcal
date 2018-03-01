@@ -14,7 +14,12 @@ class Rejestracja(models.Model):
     dzień = models.CharField(max_length=255,choices=DZIEN)
     godzina = models.CharField(max_length=255,)
 
-    # def get_absolute_url(self):
-    #      return reverse('rejestracja-detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse("rejestracja:index")
+
     def __str__(self):
-        return self.imię
+        return self.godzina+' '+str(self.dzień)
+
+    @property
+    def replacehour(self):
+        return self.godzina.replace(':', ' ')

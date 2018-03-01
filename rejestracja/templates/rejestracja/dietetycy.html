@@ -1,0 +1,23 @@
+{% extends 'rejestracja/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container">
+      <div class="py-5 text-center">
+        <h2>Dostępni dietetycy</h2>
+      </div>
+ <div class="row ">
+  <div class="col-sm-6 ">
+      <a href="{% url 'rejestracja:jan-kowalki' %}">
+      <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}" alt="Dietetyk Jan Kowalski" >
+      <p class="text-center">Dietetyk Jan Kowalski</p>
+          </a>
+  </div>
+  <div class="col-sm-6 text-justify">
+      <a href="{% url 'rejestracja:ada-wspaniala' %}">
+      <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}" alt="Dietetyczka Ada Wspaniała" >
+      <p class="text-center">Dietetyczka Ada Wspaniała</p>
+      </a>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -11,6 +11,5 @@ class RejestracjaForm(ModelForm):
           'imię': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Wpisz swoje imię'}),
           'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Wpis email'}),
           'dietetyk': forms.Select(attrs={'class': 'form-control'}),
-          'dzień': forms.Select(attrs={'class': 'form-control'}),
-
+          'dzień': forms.Select(attrs={'class': 'form-control', 'type':'hidden'}),
         }
