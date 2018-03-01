@@ -32,7 +32,7 @@
                     Formularz rejestracji do dietetyka
                 </h2>
                 <h3 class="text-center">na godzinę <span id="godzina_tekst"></span></h3>
-                <h4 class="text-center"><span id="dzien_tekst"></span></h4>
+                <h4 class="text-center">w najbliższy <span id="dzien_tekst"></span></h4>
                 <div class="container">
                     <div class="row">
                         <div class="col">
@@ -62,43 +62,43 @@
     <div class="row seven-cols">
         <div id="1" class="col-md-1"><p>Poniedziałek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}1" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}1" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Wtorek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}2" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}2" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Środa</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}3" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}3" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Czwartek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}4" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}4" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Piątek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}5" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}5" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Sobota</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}6" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}6" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Niedziela</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id)" id="{{i | cut:':'}}7" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}7" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
             {%endfor%}
         </div>
     </div>
@@ -106,17 +106,19 @@
 
 
 <script>
-    function handleSelect(id){
-    var godzina = id.slice(0, 5);
-    var dzien = id.slice(6, 7);
-    $("#id_godzina").val(godzina);
-    $("#id_dzień").val(dzien);
-    $("#godzina_tekst").text(godzina);
-    $("#formi").show();
+  $(document).ready(function(){
     {% for i in niedostepne %}
-     $("#{{i}}").hide();
-    {% endfor %}
-
+      $("#{{i}}").hide();
+     {% endfor %}
+});
+    function handleSelect(id, godz){
+    var godzina = id.slice(0, 5);
+    var dzien = id.slice(4,5);
+    $("#id_godzina").val(godz);
+    $("#id_dzień").val(dzien);
+    $("#godzina_tekst").text(godz);
+    $("#dzien_tekst").text($("#id_dzień option:selected").text());
+    $("#formi").show();
     }
 
 </script>
