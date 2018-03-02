@@ -1,99 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Jan Kowalski</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://www.jqueryscript.net/demo/Basic-Schedule-Calendar-Plugin-jQuery-Weekly-Scheduler/jquery.weekly-schedule-plugin.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{% extends 'rejestracja/base.html' %}
+{% load static %}
+{% block content %}
 
+<div class="container">
+<p>Enter names in the fields, then click "Submit" to submit the form:</p>
 
-</head>
-<body>
+<form id="frm1" method='POST', action ="/test">
+   {% csrf_token %}
+  First name: <input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br><br>
+<input type="submit" value="submit">
 
-
-        <div class="container" style="">
-        <h1>Jan Kowalski</h1>
-            <!--<div id="target" class="schedule" style="width: 100%; display: flex; flex-direction: column; justify-content: flex-start;">  </div>-->
-
-        </div>
-            <div class="container">
- <div class="col-md-4">
-    <div class="row">
-        <div class="col-md-4"></div> <!-- this column empty -->
-        <div class="col-md-4"> <p>Poniedziałek</p>
-
-            {%for i in godziny%}
-            <button id ="{{i}}" class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-4"><p>Wtorek</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-    </div>
+</form>
 </div>
+<script>
+var frm = $('form#frm1');
 
-<div class="col-md-8">
-    <div class="row">
-        <div class="col-md-2"> <p>Środa</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-2"> <p>Czwartek</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-2"><p> Piątek</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-2"><p>Sobota</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-2"><p>Niedziela</p>
-            {%for i in godziny%}
-            <button class ='btn btn-primary btn-xs btn-block'>{{i}}</button>
-        {%endfor%} </div>
-        <div class="col-md-2"></div> <!-- this column empty -->
-    </div>
-</div>
+   frm.submit(function (e) {
 
+       e.preventDefault();
 
-</div>
-        <div class="container">
-             <section>
+       $.ajax({
+           type: frm.attr('method'),
+           url: frm.attr('action'),
+           data: frm.serialize(),
+           success: function (data) {
+               console.log('Submission was successful.');
+               console.log(data);
+           },
+           error: function (data) {
+               console.log('An error occurred.');
+               console.log(data);
+           },
+       });
+   });
 
-                {{forms.as_p}}
-                 {{forms.godzina}}
-</section>
-        </div>
+// $("form#frm1").submit(function() {console.log('print');});
+// $.ajax({
+//        type: "POST",
+//        url: url,
+//        data: $("#idForm").serialize(), // serializes the form's elements.
+//        success: function(data)
+//        {
+//            alert(data); // show response from the php script.
+//        }
+//      });
+//
+// e.preventDefault(); // avoid to execute the actual submit of the form.
+</script>
 
-
-<!--<table>-->
-
-
-    <!--{% for i in godziny %}-->
-
-<!--<tr>-->
-    <!--<td>{{i}}</td>-->
-    <!--{% for d in dni %}-->
-            <!--<td><button>{{i}}</button></td>-->
-    <!--{% endfor %}-->
-<!--</tr>-->
-          <!--{%endfor %}-->
- <!--</table>-->
-        <script>
-            $('#target').weekly_schedule();
-            $('.schedule').on('selectionmade', function() {
-                console.log("Selection Made");
-            }).on('selectionremoved', function() {
-                console.log("Selection Removed");
-            });
-
-
-        </script>
-
-
-</body>
-</html>
+{% endblock %}

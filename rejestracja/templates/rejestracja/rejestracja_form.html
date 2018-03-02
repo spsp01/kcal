@@ -2,6 +2,8 @@
 {% load static %}
 {% block content %}
 
+
+
 <div class="container">
     <div class="row">
 
@@ -39,7 +41,7 @@
                             {{forms.fietetyk.text }}
                         </div>
                         <div class="col">
-                            <form class="text-center" method="POST" action="{{forms.dietetyk.url}}" >
+                            <form id="frm1" class="text-center" method="POST" action="/jan-kowalski" >
                                 {% csrf_token %}
                                 {{forms.as_p}}
                                 <input class="btn btn-success" type="submit" value="Zarejestruj">
@@ -121,5 +123,28 @@
     $("#formi").show();
     }
 
+</script>
+
+<script>
+    var frm = $('form#frm1');
+
+   frm.submit(function (e) {
+
+       e.preventDefault();
+
+       $.ajax({
+           type: frm.attr('method'),
+           url: frm.attr('action'),
+           data: frm.serialize(),
+           success: function (data) {
+               console.log('Submission was successful.');
+               console.log(data);
+           },
+           error: function (data) {
+               console.log('An error occurred.');
+               console.log(data);
+           },
+       });
+   });
 </script>
 {% endblock %}
