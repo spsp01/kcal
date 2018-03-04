@@ -16,7 +16,7 @@ Pierwszym krokiem jest pobranie repozytorium i aktywacja lokalnego wirtualnego ≈
 instalacja wymaganych pakiet√≥w z pliku requirements.txt
 
 ```
-pip install - rrequirements.txt
+pip install - r requirements.txt
 ```
 
 ### Uruchomienie
