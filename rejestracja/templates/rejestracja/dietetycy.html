@@ -6,16 +6,18 @@
         <h2>Dostępni dietetycy</h2>
       </div>
  <div class="row ">
-  <div class="col-sm-6 ">
-      <a href="{% url 'rejestracja:jan-kowalki' %}">
+  <div class="col-sm-6 text-center">
+      <a href="{% url 'rejestracja:jan-kowalski' %}">
       <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}" alt="Dietetyk Jan Kowalski" >
-      <p class="text-center">Dietetyk Jan Kowalski</p>
-          </a>
+      <button type="button" class="btn btn-info ">Dietetyk Jan Kowalski</button>
+      </a>
   </div>
-  <div class="col-sm-6 text-justify">
+  <div class="col-sm-6 text-center">
+
       <a href="{% url 'rejestracja:ada-wspaniala' %}">
       <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}" alt="Dietetyczka Ada Wspaniała" >
-      <p class="text-center">Dietetyczka Ada Wspaniała</p>
+     <button type="button" class="btn btn-info ">Dietetyczka Ada Wspaniała</button>
+
       </a>
   </div>
 </div>

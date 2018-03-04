@@ -2,8 +2,28 @@
 {% load static %}
 {% block content %}
 
+<!-- The Modal -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Potwierdzenie rejestracji</h4>
+       </div>
 
+      <!-- Modal body -->
+      <div id="modal-text" class="modal-body">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      <a href="/"><button  type="button" class="btn btn-danger">Powróć do strony głównej</button></a>
+      </div>
+
+    </div>
+  </div>
+</div>
 <div class="container">
     <div class="row">
 
@@ -11,12 +31,21 @@
 
             <div class="card mt-5 ">
                 <div class="card-block">
+                    {% if request.path == '/jan-kowalski' %}
                     <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}"
                          alt="Dietetyk Jan Kowalski">
                     <div id="text-top">
                         <p class="text-center">Dietetyk </p>
                         <h1 class="text-center">Jan Kowalski</h1>
                     </div>
+                     {% else %}
+                    <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}"
+                         alt="Dietetyk Ada Wspaniała">
+                    <div id="text-top">
+                        <p class="text-center">Dietetyk </p>
+                        <h1 class="text-center">Ada Wspaniała</h1>
+                    </div>
+                    {% endif %}
 
 
                 </div>
@@ -35,12 +64,16 @@
                 </h2>
                 <h3 class="text-center">na godzinę <span id="godzina_tekst"></span></h3>
                 <h4 class="text-center">w najbliższy <span id="dzien_tekst"></span></h4>
+
                 <div class="container">
                     <div class="row">
                         <div class="col">
-                            {{forms.fietetyk.text }}
+
                         </div>
                         <div class="col">
+                            <div id="blad1" class="alert alert-danger" role="alert" style="display: none">
+                                Błąd
+                            </div>
                             <form id="frm1" class="text-center" method="POST" action="/jan-kowalski" >
                                 {% csrf_token %}
                                 {{forms.as_p}}
@@ -109,9 +142,20 @@
 
 <script>
   $(document).ready(function(){
-    {% for i in niedostepne %}
+  {% if request.path == '/jan-kowalski' %}
+    {% for i in niedostepne_jk %}
       $("#{{i}}").hide();
-     {% endfor %}
+       {% endfor %}
+   {% else %}
+   {% for i in niedostepne_aw %}
+      $("#{{i}}").hide();
+       {% endfor %}
+   {% endif %}
+
+
+    {% if request.path == '/ada-wspaniala' %}
+       $('#id_dietetyk').val(2)
+       {% endif %}
 });
     function handleSelect(id, godz){
     var godzina = id.slice(0, 5);
@@ -137,8 +181,19 @@
            url: frm.attr('action'),
            data: frm.serialize(),
            success: function (data) {
-               console.log('Submission was successful.');
-               console.log(data);
+
+           if (data['blad'] == 1) {
+             $('#blad1').text(data['object'])
+             $('#blad1').show();
+
+             console.log('Błąd')
+           }
+           else {
+            $(location).attr('href',data['object']);
+
+           }
+           console.log(data['blad']);
+           console.log(data['object']);
            },
            error: function (data) {
                console.log('An error occurred.');

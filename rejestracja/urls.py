@@ -1,10 +1,11 @@
 from django.urls import path
-import rejestracja.views as views
+from rejestracja.views import DietetykView, RejestracjaView, success
 
 app_name = 'rejestracja'
 urlpatterns = [
-    path('', views.RejestracjaView.as_view(), name='index' ),
-    path('jan-kowalski', views.DietetykView.as_view(), name='jan-kowalki'),
-    path('ada-wspaniala', views.DietetykView.as_view(), name='ada-wspaniala'),
-    path('test', views.detail, name='test' )
+    path('', RejestracjaView.as_view(), name='index' ),
+    path('jan-kowalski',DietetykView.as_view(), name='jan-kowalski'),
+    path('ada-wspaniala', DietetykView.as_view(), name='ada-wspaniala'),
+    path('success', success, name='success'),
+   # path('test', views.detail, name='test' )
 ]
