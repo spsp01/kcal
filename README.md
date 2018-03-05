@@ -47,7 +47,7 @@ DATABASES = {
 
 ### Email
 
-W wersji startowej projekt nie ma skofigurowanego dostępu do poczty email. Aby skonfigurować należy zaktualizować dane
+W wersji startowej projekt nie ma skonfigurowanego dostępu do poczty email. Aby skonfigurować należy zaktualizować dane
 w pliku kcal/settings.py
 
 ```

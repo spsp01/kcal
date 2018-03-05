@@ -4,25 +4,27 @@
 
 <!-- The Modal -->
 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Potwierdzenie rejestracji</h4>
-       </div>
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Potwierdzenie rejestracji</h4>
+            </div>
 
-      <!-- Modal body -->
-      <div id="modal-text" class="modal-body">
-      </div>
+            <!-- Modal body -->
+            <div id="modal-text" class="modal-body">
+            </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-      <a href="/"><button  type="button" class="btn btn-danger">Powróć do strony głównej</button></a>
-      </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <a href="/">
+                    <button type="button" class="btn btn-danger">Powróć do strony głównej</button>
+                </a>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
 <div class="container">
     <div class="row">
@@ -30,7 +32,7 @@
         <div class="col-sm-12 ">
 
             <div class="card mt-5 ">
-                <div class="card-block">
+                <div id="dietetykcard" class="card-block">
                     {% if request.path == '/jan-kowalski' %}
                     <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}"
                          alt="Dietetyk Jan Kowalski">
@@ -38,7 +40,7 @@
                         <p class="text-center">Dietetyk </p>
                         <h1 class="text-center">Jan Kowalski</h1>
                     </div>
-                     {% else %}
+                    {% else %}
                     <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}"
                          alt="Dietetyk Ada Wspaniała">
                     <div id="text-top">
@@ -74,7 +76,7 @@
                             <div id="blad1" class="alert alert-danger" role="alert" style="display: none">
                                 Błąd
                             </div>
-                            <form id="frm1" class="text-center" method="POST" action="/jan-kowalski" >
+                            <form id="frm1" class="text-center" method="POST" action="/jan-kowalski">
                                 {% csrf_token %}
                                 {{forms.as_p}}
                                 <input class="btn btn-success" type="submit" value="Zarejestruj">
@@ -97,43 +99,57 @@
     <div class="row seven-cols">
         <div id="1" class="col-md-1"><p>Poniedziałek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}1" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}1"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Wtorek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}2" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}2"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Środa</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}3" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}3"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Czwartek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}4" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}4"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Piątek</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}5" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}5"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Sobota</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}6" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}6"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
         <div class="col-md-1">
             <p>Niedziela</p>
             {%for i in godziny%}
-            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}7" class='btn btn-primary btn-xs btn-block'>{{i}}</button>
+            <button onclick="handleSelect(this.id, this.innerText)" id="{{i | cut:':'}}7"
+                    class='btn btn-primary btn-xs btn-block'>{{i}}
+            </button>
             {%endfor%}
         </div>
     </div>
@@ -165,6 +181,7 @@
     $("#godzina_tekst").text(godz);
     $("#dzien_tekst").text($("#id_dzień option:selected").text());
     $("#formi").show();
+    $("#dietetykcard").get(0).scrollIntoView();
     }
 
 </script>
@@ -186,7 +203,6 @@
              $('#blad1').text(data['object'])
              $('#blad1').show();
 
-             console.log('Błąd')
            }
            else {
             $(location).attr('href',data['object']);
@@ -197,7 +213,6 @@
            },
            error: function (data) {
                console.log('An error occurred.');
-               console.log(data);
            },
        });
    });

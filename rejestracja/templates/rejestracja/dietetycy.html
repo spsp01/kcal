@@ -2,24 +2,25 @@
 {% block content %}
 {% load static %}
 <div class="container">
-      <div class="py-5 text-center">
+    <div class="py-5 text-center">
         <h2>Dostępni dietetycy</h2>
-      </div>
- <div class="row ">
-  <div class="col-sm-6 text-center">
-      <a href="{% url 'rejestracja:jan-kowalski' %}">
-      <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}" alt="Dietetyk Jan Kowalski" >
-      <button type="button" class="btn btn-info ">Dietetyk Jan Kowalski</button>
-      </a>
-  </div>
-  <div class="col-sm-6 text-center">
+    </div>
+    <div class="row ">
+        <div class="col-sm-6 text-center">
+            <a href="{% url 'rejestracja:jan-kowalski' %}">
+                <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-male.jpg' %}" alt="Dietetyk Jan Kowalski">
+                <button type="button" class="btn btn-info ">Dietetyk Jan Kowalski</button>
+            </a>
+        </div>
+        <div class="col-sm-6 text-center">
 
-      <a href="{% url 'rejestracja:ada-wspaniala' %}">
-      <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}" alt="Dietetyczka Ada Wspaniała" >
-     <button type="button" class="btn btn-info ">Dietetyczka Ada Wspaniała</button>
+            <a href="{% url 'rejestracja:ada-wspaniala' %}">
+                <img class="d-block mx-auto mb-4" src="{% static 'img/doctor-female.png' %}"
+                     alt="Dietetyczka Ada Wspaniała">
+                <button type="button" class="btn btn-info ">Dietetyczka Ada Wspaniała</button>
 
-      </a>
-  </div>
-</div>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
